@@ -41,7 +41,7 @@ var Header = function (_Component) {
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          null,
+          { className: 'logo' },
           ' Logo '
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
