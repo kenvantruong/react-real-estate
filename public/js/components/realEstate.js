@@ -385,49 +385,62 @@ var Listings = function (_Component) {
               { className: 'listing-img' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
-                { className: 'Address' },
-                'Address'
+                { className: 'address' },
+                '841 Jack London Dr'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'details' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'user-img' }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'div',
-                  { className: 'user-details' },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'span',
-                    { className: 'user-name' },
-                    'Nina Smith'
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'span',
-                    { className: 'post-date' },
-                    '06/25/2018'
-                  )
+                  { className: 'col-md-3' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'user-img' })
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'div',
-                  { className: 'listing-details' },
+                  { className: 'col-md-9' },
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'floor-space' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { 'class': 'fa fa-square-o' }),
+                    { className: 'user-details' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                       'span',
-                      null,
-                      '1000 ft\xB2'
+                      { className: 'user-name' },
+                      'Nina Smith'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'span',
+                      { className: 'post-date' },
+                      '06/25/2018'
                     )
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'bedrooms' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-bed', 'aria-hidden': 'true' }),
+                    { className: 'listing-details' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                      'span',
-                      null,
-                      '3 bedrooms'
+                      'div',
+                      { className: 'floor-space' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'far fa-square', 'aria-hidden': 'true' }),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'span',
+                        null,
+                        '1000 ft\xB2'
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'bedrooms' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-bed', 'aria-hidden': 'true' }),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'span',
+                        null,
+                        '3 bedrooms'
+                      )
                     )
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'view-btn' },
+                    'View Listing'
                   )
                 )
               )
