@@ -1,6 +1,56 @@
 webpackJsonp([0],{
 
-/***/ 101:
+/***/ 100:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var listingsData = [{
+  address: '3345 American Yams Rd.',
+  city: 'Eaglewood',
+  state: 'CA',
+  rooms: 4,
+  price: 455000,
+  floorSpace: 2000,
+  extras: ['elevator', 'basketball court'],
+  homeType: 'Apartment',
+  image: 'http://www.billgriffinrealestate.com/wp-content/uploads/Luxury-Contemporary-Homes-in-Dallas-1-1080x675.jpg'
+}, {
+  address: '9832 James Logan Cir.',
+  city: 'Fremont',
+  state: 'CA',
+  rooms: 3,
+  price: 1055000,
+  floorSpace: 2500,
+  extras: ['basketball court', 'swimming pool'],
+  homeType: 'house',
+  image: 'http://www.billgriffinrealestate.com/wp-content/uploads/Luxury-Contemporary-Homes-in-Dallas-1-1080x675.jpg'
+}, {
+  address: '5683 Lake Shermand dr.',
+  city: 'Sacramento',
+  state: 'CA',
+  rooms: 5,
+  price: 855000,
+  floorSpace: 4500,
+  extras: ['bowling alley', 'Billard'],
+  homeType: 'house',
+  image: 'http://www.billgriffinrealestate.com/wp-content/uploads/Luxury-Contemporary-Homes-in-Dallas-1-1080x675.jpg'
+}, {
+  address: '2398 Ashley way.',
+  city: 'Oakland',
+  state: 'CA',
+  rooms: 2,
+  price: 955000,
+  floorSpace: 2800,
+  extras: ['theater room', 'skate park backyard'],
+  homeType: 'Condo',
+  image: 'http://www.billgriffinrealestate.com/wp-content/uploads/Luxury-Contemporary-Homes-in-Dallas-1-1080x675.jpg'
+}];
+
+/* harmony default export */ __webpack_exports__["a"] = (listingsData);
+
+/***/ }),
+
+/***/ 102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12,6 +62,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Header_js__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Filter_js__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Listings_js__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__ = __webpack_require__(100);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19,6 +70,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -35,7 +87,8 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
     _this.state = {
-      name: 'Ken'
+      name: 'Ken',
+      listingsData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */]
     };
     return _this;
   }
@@ -43,6 +96,7 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'render',
     value: function render() {
+      console.log(this.state.listingsData);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
@@ -51,7 +105,7 @@ var App = function (_Component) {
           'section',
           { id: 'content-area' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Filter_js__["a" /* default */], null),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], null)
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], { listingsData: this.state.listingsData })
         )
       );
     }
@@ -327,56 +381,20 @@ var Listings = function (_Component) {
     _this.state = {
       name: 'Ken'
     };
+    _this.loopListings = _this.loopListings.bind(_this);
     return _this;
   }
 
   _createClass(Listings, [{
-    key: 'render',
-    value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'section',
-        { id: 'listings' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'section',
-          { className: 'search-area' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'search' })
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'section',
-          { className: 'sortby-area' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'results' },
-            '390 results found'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'sort-options' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'select',
-              { name: 'sortby', className: 'sortby' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'option',
-                { value: 'price-asc' },
-                'Highest Price'
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'option',
-                { value: 'price-dsc' },
-                'Lowest Price'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'view' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-th-list', 'aria-hidden': 'true' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-th', 'aria-hidden': 'true' })
-            )
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'section',
-          { className: 'listings-results' },
+    key: 'loopListings',
+    value: function loopListings() {
+      var listingsData = this.props.listingsData;
+
+
+      return listingsData.map(function (listing, index) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'col-md-3', key: index },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'listing' },
@@ -450,24 +468,75 @@ var Listings = function (_Component) {
               { className: 'bottom-info' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
-                null,
-                '$1000 /month'
+                { className: 'price' },
+                '$3800 /month'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
-                null,
+                { className: 'location' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
                 'Meadows, CA'
               )
             )
           )
+        );
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'section',
+        { id: 'listings' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'section',
+          { className: 'search-area' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'search' })
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'section',
-          { className: 'pagination' },
+          { className: 'sortby-area' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'results' },
+            '390 results found'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'sort-options' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'select',
+              { name: 'sortby', className: 'sortby' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'option',
+                { value: 'price-asc' },
+                'Highest Price'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'option',
+                { value: 'price-dsc' },
+                'Lowest Price'
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'view' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-th-list', 'aria-hidden': 'true' }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-th', 'aria-hidden': 'true' })
+            )
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'section',
+          { className: 'listings-results' },
+          this.loopListings()
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'section',
+          { id: 'pagination' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'ul',
-            { className: 'pagination-nums' },
+            { className: 'pages' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'li',
               null,
@@ -475,7 +544,7 @@ var Listings = function (_Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'li',
-              null,
+              { className: 'active' },
               '1'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -516,4 +585,4 @@ var Listings = function (_Component) {
 
 /***/ })
 
-},[101]);
+},[102]);
