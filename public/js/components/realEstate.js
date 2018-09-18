@@ -130,7 +130,15 @@ var App = function (_Component) {
 
     _this.state = {
       name: 'Ken',
-      listingsData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */]
+      listingsData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */],
+      min_price: 0,
+      max_price: 1000000,
+      min_floor_space: 0,
+      max_floor_space: 50000,
+      elevator: false,
+      finished_basement: false,
+      gym: false,
+      swimming_pool: false
     };
 
     _this.change = _this.change.bind(_this);
@@ -159,7 +167,7 @@ var App = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'section',
           { id: 'content-area' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Filter_js__["a" /* default */], { change: this.change }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Filter_js__["a" /* default */], { change: this.change, globalState: this.state }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], { listingsData: this.state.listingsData })
         )
       );
@@ -262,22 +270,22 @@ var Filter = function (_Component) {
             (_React$createElement = { name: 'housetype' }, _defineProperty(_React$createElement, 'name', 'neighbourhood'), _defineProperty(_React$createElement, 'className', 'filters housetype'), _defineProperty(_React$createElement, 'onChange', this.props.change), _React$createElement),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              null,
+              { value: 'ranch' },
               'Ranch'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              null,
+              { value: 'house' },
               'House'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              null,
+              { value: 'apartment' },
               'Apartment'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              null,
+              { value: 'condo' },
               'Condo'
             )
           ),
@@ -286,8 +294,23 @@ var Filter = function (_Component) {
             { name: 'bedrooms', className: 'filters bedrooms', onChange: this.props.change },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              null,
+              { value: '2' },
               '2 BR'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: '3' },
+              '3 BR'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: '4' },
+              '4 BR'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: '5' },
+              '5+ BR'
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -298,8 +321,8 @@ var Filter = function (_Component) {
               { className: 'title' },
               'Price'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'min-price', className: 'min-price' }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'max-price', className: 'max-price' })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'min_price', className: 'min-price', onChange: this.props.change, value: this.props.globalState.min_price }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'max_price', className: 'max-price', onChange: this.props.change, value: this.props.globalState.max_price })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -309,8 +332,8 @@ var Filter = function (_Component) {
               { className: 'title' },
               'Floor Space'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'min-price', className: 'min-floor-price' }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'max-price', className: 'max-floor-price' })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'min_floor_space', className: 'min-floor-space', onChange: this.props.change, value: this.props.globalState.min_floor_space }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'max_floor_space', className: 'max-floor-space', onChange: this.props.change, value: this.props.globalState.max_floor_space })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -328,7 +351,7 @@ var Filter = function (_Component) {
                 null,
                 'Elevators'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'extras', value: 'elevator', type: 'checkbox' })
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'elevator', value: 'elevator', type: 'checkbox', onChange: this.props.change })
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
@@ -338,7 +361,7 @@ var Filter = function (_Component) {
                 null,
                 'Swimming Pool'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'extras', value: 'swimming-pool', type: 'checkbox' })
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'swimming_pool', value: 'swimming_pool', type: 'checkbox', onChange: this.props.change })
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
@@ -348,7 +371,7 @@ var Filter = function (_Component) {
                 null,
                 'Finished Basement'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'extras', value: 'finished-basement', type: 'checkbox' })
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'finished_basement', value: 'finished_basement', type: 'checkbox', onChange: this.props.change })
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
@@ -358,7 +381,7 @@ var Filter = function (_Component) {
                 null,
                 'Gym'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'extras', value: 'gym', type: 'checkbox' })
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'gym', value: 'gym', type: 'checkbox', onChange: this.props.change })
             )
           )
         )

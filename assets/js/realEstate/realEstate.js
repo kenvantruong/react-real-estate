@@ -13,6 +13,14 @@ class App extends Component {
     this.state = {
       name: 'Ken',
       listingsData,
+      min_price: 0,
+      max_price: 1000000,
+      min_floor_space: 0,
+      max_floor_space: 50000,
+      elevator: false,
+      finished_basement: false,
+      gym: false,
+      swimming_pool: false
     }
     
     this.change = this.change.bind(this)
@@ -32,7 +40,7 @@ class App extends Component {
       <div>
         <Header />
         <section id="content-area">
-          <Filter change={this.change} />
+          <Filter change={this.change} globalState={this.state}/>
           <Listings listingsData={this.state.listingsData}/>
         </section>
       </div>
