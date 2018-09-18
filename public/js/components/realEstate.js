@@ -23,7 +23,7 @@ var listingsData = [{
   floorSpace: 2500,
   extras: ['basketball court', 'swimming pool'],
   homeType: 'house',
-  image: 'http://www.billgriffinrealestate.com/wp-content/uploads/Luxury-Contemporary-Homes-in-Dallas-1-1080x675.jpg'
+  image: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350'
 }, {
   address: '5683 Lake Shermand dr.',
   city: 'Sacramento',
@@ -33,7 +33,7 @@ var listingsData = [{
   floorSpace: 4500,
   extras: ['bowling alley', 'Billard'],
   homeType: 'house',
-  image: 'http://www.billgriffinrealestate.com/wp-content/uploads/Luxury-Contemporary-Homes-in-Dallas-1-1080x675.jpg'
+  image: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
 }, {
   address: '2398 Ashley way.',
   city: 'Oakland',
@@ -43,7 +43,47 @@ var listingsData = [{
   floorSpace: 2800,
   extras: ['theater room', 'skate park backyard'],
   homeType: 'Condo',
-  image: 'http://www.billgriffinrealestate.com/wp-content/uploads/Luxury-Contemporary-Homes-in-Dallas-1-1080x675.jpg'
+  image: 'https://images.pexels.com/photos/273683/pexels-photo-273683.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+}, {
+  address: '1147 HummingBeach Cir.',
+  city: 'San Rafael',
+  state: 'CA',
+  rooms: 4,
+  price: 565000,
+  floorSpace: 2400,
+  extras: ['hot tub', 'bbq grill'],
+  homeType: 'apartment',
+  image: 'https://ap.rdcpix.com/446966594/12d1b9e197de4a6c5bb0ce62fa9ae96cl-m0xd-w1020_h770_q80.jpg'
+}, {
+  address: '1714 Mission Ave.',
+  city: 'San Rosa',
+  state: 'CA',
+  rooms: 3,
+  price: 765000,
+  floorSpace: 3400,
+  extras: ['Game Room', 'Boat'],
+  homeType: 'Condo',
+  image: 'https://ap.rdcpix.com/446966594/12d1b9e197de4a6c5bb0ce62fa9ae96cl-m0xd-w1020_h770_q80.jpg'
+}, {
+  address: '202 Ridgewood Dr.',
+  city: 'Milpitas',
+  state: 'CA',
+  rooms: 5,
+  price: 965000,
+  floorSpace: 3400,
+  extras: ['Swimming Pool', 'Game Room'],
+  homeType: 'house',
+  image: 'https://ap.rdcpix.com/1905569504/c4e8e3a8ce69757bdb870233a59f6aacl-m0xd-w1020_h770_q80.jpg'
+}, {
+  address: '201 Center St.',
+  city: 'Santa Clara',
+  state: 'CA',
+  rooms: 2,
+  price: 765000,
+  floorSpace: 2400,
+  extras: ['Hot Tub', 'No Neighbors'],
+  homeType: 'house',
+  image: 'https://ap.rdcpix.com/146421606/247044e7106649e1b01773936c0aaf0bl-m0xd-w1020_h770_q80.jpg'
 }];
 
 /* harmony default export */ __webpack_exports__["a"] = (listingsData);
@@ -64,6 +104,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Listings_js__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__ = __webpack_require__(100);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -90,13 +132,26 @@ var App = function (_Component) {
       name: 'Ken',
       listingsData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */]
     };
+
+    _this.change = _this.change.bind(_this);
     return _this;
   }
 
   _createClass(App, [{
+    key: 'change',
+    value: function change(event) {
+      var _this2 = this;
+
+      var name = event.target.name;
+      var value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+
+      this.setState(_defineProperty({}, name, value), function () {
+        console.log(_this2.state);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      console.log(this.state.listingsData);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
@@ -104,7 +159,7 @@ var App = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'section',
           { id: 'content-area' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Filter_js__["a" /* default */], null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Filter_js__["a" /* default */], { change: this.change }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], { listingsData: this.state.listingsData })
         )
       );
@@ -170,25 +225,65 @@ var Filter = function (_Component) {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'select',
-            { name: 'neighbourhood', className: 'filters neighborhood' },
+            { name: 'neighbourhood', className: 'filters neighborhood', onChange: this.props.change },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              null,
+              { value: 'Meadows' },
               'Meadows'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'Oakland' },
+              'Oakland'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'SanRafael' },
+              'San Rafael'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'SanRosa' },
+              'San Rosa'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'SantaClara' },
+              'Santa Clara'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'Milpitas' },
+              'Milpitas'
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'select',
-            (_React$createElement = { name: 'housetype' }, _defineProperty(_React$createElement, 'name', 'neighbourhood'), _defineProperty(_React$createElement, 'className', 'filters housetype'), _React$createElement),
+            (_React$createElement = { name: 'housetype' }, _defineProperty(_React$createElement, 'name', 'neighbourhood'), _defineProperty(_React$createElement, 'className', 'filters housetype'), _defineProperty(_React$createElement, 'onChange', this.props.change), _React$createElement),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
               null,
               'Ranch'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              null,
+              'House'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              null,
+              'Apartment'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              null,
+              'Condo'
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'select',
-            { name: 'bedrooms', className: 'filters bedrooms' },
+            { name: 'bedrooms', className: 'filters bedrooms', onChange: this.props.change },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
               null,
@@ -227,7 +322,7 @@ var Filter = function (_Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { 'for': 'extras' },
+              { htmlFor: 'extras' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
                 null,
@@ -237,7 +332,7 @@ var Filter = function (_Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { 'for': 'extras' },
+              { htmlFor: 'extras' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
                 null,
@@ -247,7 +342,7 @@ var Filter = function (_Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { 'for': 'extras' },
+              { htmlFor: 'extras' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
                 null,
@@ -257,7 +352,7 @@ var Filter = function (_Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { 'for': 'extras' },
+              { htmlFor: 'extras' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
                 null,
@@ -400,11 +495,11 @@ var Listings = function (_Component) {
             { className: 'listing' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
-              { className: 'listing-img' },
+              { className: 'listing-img', style: { background: 'url("' + listing.image + '") no-repeat center center' } },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
                 { className: 'address' },
-                '841 Jack London Dr'
+                listing.address
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
@@ -451,7 +546,8 @@ var Listings = function (_Component) {
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'span',
                         null,
-                        '3 bedrooms'
+                        listing.rooms,
+                        ' bedrooms'
                       )
                     )
                   ),
@@ -469,13 +565,16 @@ var Listings = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
                 { className: 'price' },
-                '$3800 /month'
+                '$',
+                listing.price
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
                 { className: 'location' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
-                'Meadows, CA'
+                listing.city,
+                ', ',
+                listing.state
               )
             )
           )
