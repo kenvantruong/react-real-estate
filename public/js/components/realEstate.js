@@ -8,31 +8,31 @@ var listingsData = [{
   address: '3345 American Yams Rd.',
   city: 'Eaglewood',
   state: 'CA',
-  rooms: 4,
+  rooms: 2,
   price: 455000,
   floorSpace: 2000,
   extras: ['elevator', 'basketball court'],
-  homeType: 'Apartment',
+  homeType: 'House',
   image: 'http://www.billgriffinrealestate.com/wp-content/uploads/Luxury-Contemporary-Homes-in-Dallas-1-1080x675.jpg'
 }, {
-  address: '9832 James Logan Cir.',
+  address: '7894 Lake Chabord dr.',
   city: 'Fremont',
   state: 'CA',
-  rooms: 3,
-  price: 1055000,
-  floorSpace: 2500,
-  extras: ['basketball court', 'swimming pool'],
-  homeType: 'house',
-  image: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350'
+  rooms: 4,
+  price: 1855000,
+  floorSpace: 7500,
+  extras: ['basketball court', 'tennis court'],
+  homeType: 'Condo',
+  image: 'https://www.washingtonian.com/wp-content/uploads/2018/08/AIA1-2048x1365.jpg'
 }, {
   address: '5683 Lake Shermand dr.',
   city: 'Sacramento',
   state: 'CA',
-  rooms: 5,
+  rooms: 4,
   price: 855000,
   floorSpace: 4500,
   extras: ['bowling alley', 'Billard'],
-  homeType: 'house',
+  homeType: 'Apartment',
   image: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
 }, {
   address: '2398 Ashley way.',
@@ -42,21 +42,21 @@ var listingsData = [{
   price: 955000,
   floorSpace: 2800,
   extras: ['theater room', 'skate park backyard'],
-  homeType: 'Condo',
+  homeType: 'House',
   image: 'https://images.pexels.com/photos/273683/pexels-photo-273683.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
 }, {
   address: '1147 HummingBeach Cir.',
   city: 'San Rafael',
   state: 'CA',
-  rooms: 4,
+  rooms: 3,
   price: 565000,
   floorSpace: 2400,
   extras: ['hot tub', 'bbq grill'],
-  homeType: 'apartment',
+  homeType: 'House',
   image: 'https://ap.rdcpix.com/446966594/12d1b9e197de4a6c5bb0ce62fa9ae96cl-m0xd-w1020_h770_q80.jpg'
 }, {
   address: '1714 Mission Ave.',
-  city: 'San Rosa',
+  city: 'Santa Rosa',
   state: 'CA',
   rooms: 3,
   price: 765000,
@@ -68,11 +68,11 @@ var listingsData = [{
   address: '202 Ridgewood Dr.',
   city: 'Milpitas',
   state: 'CA',
-  rooms: 5,
+  rooms: 2,
   price: 965000,
   floorSpace: 3400,
   extras: ['Swimming Pool', 'Game Room'],
-  homeType: 'house',
+  homeType: 'Apartment',
   image: 'http://www.domaza.ru/upload/userfiles/26/%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%B6%D0%B0_%D0%B4%D0%BE%D0%BC%D0%BE%D0%B2_%D0%B2_%D0%B1%D0%BE%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D0%B8.jpg'
 }, {
   address: '201 Center St.',
@@ -82,7 +82,7 @@ var listingsData = [{
   price: 765000,
   floorSpace: 2400,
   extras: ['Hot Tub', 'No Neighbors'],
-  homeType: 'house',
+  homeType: 'Condo',
   image: 'https://ap.rdcpix.com/146421606/247044e7106649e1b01773936c0aaf0bl-m0xd-w1020_h770_q80.jpg'
 }];
 
@@ -131,6 +131,9 @@ var App = function (_Component) {
     _this.state = {
       name: 'Ken',
       listingsData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */],
+      city: 'All',
+      homeType: 'All',
+      bedrooms: 0,
       min_price: 0,
       max_price: 1000000,
       min_floor_space: 0,
@@ -166,8 +169,21 @@ var App = function (_Component) {
       var _this3 = this;
 
       var newData = this.state.listingsData.filter(function (item) {
-        return item.price >= _this3.state.min_price && item.price <= _this3.state.max_price && item.floorSpace >= _this3.state.min_floor_space && item.floorSpace <= _this3.state.max_floor_space;
+        return item.price >= _this3.state.min_price && item.price <= _this3.state.max_price && item.floorSpace >= _this3.state.min_floor_space && item.floorSpace <= _this3.state.max_floor_space && item.rooms >= _this3.state.bedrooms;
       });
+
+      if (this.state.city != "All") {
+        newData = newData.filter(function (item) {
+          return item.city == _this3.state.city;
+        });
+      }
+
+      if (this.state.homeType != "All") {
+        newData = newData.filter(function (item) {
+          return item.homeType == _this3.state.homeType;
+        });
+      }
+
       this.setState({
         filteredData: newData
       });
@@ -206,8 +222,6 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -233,8 +247,6 @@ var Filter = function (_Component) {
   _createClass(Filter, [{
     key: 'render',
     value: function render() {
-      var _React$createElement;
-
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'section',
         { id: 'filter' },
@@ -248,11 +260,21 @@ var Filter = function (_Component) {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'select',
-            { name: 'neighbourhood', className: 'filters neighborhood', onChange: this.props.change },
+            { name: 'city', className: 'filters neighborhood', onChange: this.props.change },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              { value: 'Meadows' },
-              'Meadows'
+              { value: 'All' },
+              'All Cities'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'Eaglewood' },
+              'Eaglewood'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'Sacramento' },
+              'Sacramento'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
@@ -261,46 +283,51 @@ var Filter = function (_Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              { value: 'SanRafael' },
+              { value: 'San Rafael' },
               'San Rafael'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              { value: 'SanRosa' },
-              'San Rosa'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'SantaClara' },
-              'Santa Clara'
+              { value: 'Santa Rosa' },
+              'Santa Rosa'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
               { value: 'Milpitas' },
               'Milpitas'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'Santa Clara' },
+              'Santa Clara'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: 'Fremont' },
+              'Fremont'
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'select',
-            (_React$createElement = { name: 'housetype' }, _defineProperty(_React$createElement, 'name', 'neighbourhood'), _defineProperty(_React$createElement, 'className', 'filters housetype'), _defineProperty(_React$createElement, 'onChange', this.props.change), _React$createElement),
+            { name: 'homeType', className: 'filters housetype', onChange: this.props.change },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              { value: 'ranch' },
-              'Ranch'
+              { value: 'All' },
+              'All Types'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              { value: 'house' },
+              { value: 'House' },
               'House'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              { value: 'apartment' },
+              { value: 'Apartment' },
               'Apartment'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
-              { value: 'condo' },
+              { value: 'Condo' },
               'Condo'
             )
           ),
@@ -309,23 +336,28 @@ var Filter = function (_Component) {
             { name: 'bedrooms', className: 'filters bedrooms', onChange: this.props.change },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
+              { value: '0' },
+              'Bedrooms'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
+              { value: '1' },
+              '1+ Bedrooms'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'option',
               { value: '2' },
-              '2 BR'
+              '2+ Bedrooms'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
               { value: '3' },
-              '3 BR'
+              '3+ Bedrooms'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
               { value: '4' },
-              '4 BR'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: '5' },
-              '5+ BR'
+              '4+ Bedrooms'
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
