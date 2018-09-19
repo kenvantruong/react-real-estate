@@ -8,7 +8,7 @@ var listingsData = [{
   address: '3345 American Yams Rd.',
   city: 'Eaglewood',
   state: 'CA',
-  rooms: 2,
+  rooms: 3,
   price: 455000,
   floorSpace: 2000,
   extras: ['elevator', 'basketball court'],
@@ -84,6 +84,16 @@ var listingsData = [{
   extras: ['Hot Tub', 'No Neighbors'],
   homeType: 'Condo',
   image: 'https://ap.rdcpix.com/146421606/247044e7106649e1b01773936c0aaf0bl-m0xd-w1020_h770_q80.jpg'
+}, {
+  address: '1237 Lake Merrit Blvd.',
+  city: 'Fremont',
+  state: 'CA',
+  rooms: 5,
+  price: 1855000,
+  floorSpace: 7500,
+  extras: ['basketball court', 'tennis court'],
+  homeType: 'Condo',
+  image: 'https://propertyfox.co.za/wp-content/uploads/2018/03/glass-houses-768x512.jpg'
 }];
 
 /* harmony default export */ __webpack_exports__["a"] = (listingsData);
@@ -104,6 +114,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Listings_js__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__ = __webpack_require__(100);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -142,11 +154,13 @@ var App = function (_Component) {
       finished_basement: false,
       gym: false,
       swimming_pool: false,
-      filteredData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */]
+      filteredData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */],
+      populateFormsData: ''
     };
 
     _this.change = _this.change.bind(_this);
     _this.filteredData = _this.filteredData.bind(_this);
+    _this.populateForms = _this.populateForms.bind(_this);
     return _this;
   }
 
@@ -189,6 +203,42 @@ var App = function (_Component) {
       });
     }
   }, {
+    key: 'populateForms',
+    value: function populateForms() {
+      var _this4 = this;
+
+      // City
+      var cities = this.state.listingsData.map(function (item) {
+        return item.city;
+      });
+      cities = new Set(cities);
+      cities = [].concat(_toConsumableArray(cities));
+
+      // HomeType
+      var homeTypes = this.state.listingsData.map(function (item) {
+        return item.homeType;
+      });
+      homeTypes = new Set(homeTypes);
+      homeTypes = [].concat(_toConsumableArray(homeTypes));
+
+      // Bedrooms
+      var bedrooms = this.state.listingsData.map(function (item) {
+        return item.rooms;
+      });
+      bedrooms = new Set(bedrooms);
+      bedrooms = [].concat(_toConsumableArray(bedrooms));
+
+      this.setState({
+        populateFormsData: {
+          homeTypes: homeTypes,
+          bedrooms: bedrooms,
+          cities: cities
+        }
+      }, function () {
+        console.log(_this4.state);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -198,7 +248,7 @@ var App = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'section',
           { id: 'content-area' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Filter_js__["a" /* default */], { change: this.change, globalState: this.state }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Filter_js__["a" /* default */], { change: this.change, globalState: this.state, populateAction: this.populateForms }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], { listingsData: this.state.filteredData })
         )
       );
@@ -241,10 +291,70 @@ var Filter = function (_Component) {
     _this.state = {
       name: 'Ken'
     };
+    _this.cities = _this.cities.bind(_this);
+    _this.homeTypes = _this.homeTypes.bind(_this);
+    _this.bedrooms = _this.bedrooms.bind(_this);
     return _this;
   }
 
   _createClass(Filter, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.props.populateAction();
+    }
+  }, {
+    key: 'cities',
+    value: function cities() {
+      if (this.props.globalState.populateFormsData.cities != undefined) {
+        var cities = this.props.globalState.populateFormsData.cities;
+
+
+        console.log(cities);
+        return cities.map(function (item) {
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'option',
+            { key: item, value: item },
+            item
+          );
+        });
+      }
+    }
+  }, {
+    key: 'homeTypes',
+    value: function homeTypes() {
+      if (this.props.globalState.populateFormsData.homeTypes != undefined) {
+        var homeTypes = this.props.globalState.populateFormsData.homeTypes;
+
+
+        console.log(homeTypes);
+        return homeTypes.map(function (item) {
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'option',
+            { key: item, value: item },
+            item
+          );
+        });
+      }
+    }
+  }, {
+    key: 'bedrooms',
+    value: function bedrooms() {
+      if (this.props.globalState.populateFormsData.bedrooms != undefined) {
+        var bedrooms = this.props.globalState.populateFormsData.bedrooms;
+
+
+        console.log(bedrooms);
+        return bedrooms.map(function (item) {
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'option',
+            { key: item, value: item },
+            item,
+            '+ BR'
+          );
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -259,53 +369,24 @@ var Filter = function (_Component) {
             'Filter'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'label',
+            { htmlFor: 'city' },
+            'City'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'select',
             { name: 'city', className: 'filters neighborhood', onChange: this.props.change },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'option',
               { value: 'All' },
-              'All Cities'
+              'All'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'Eaglewood' },
-              'Eaglewood'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'Sacramento' },
-              'Sacramento'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'Oakland' },
-              'Oakland'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'San Rafael' },
-              'San Rafael'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'Santa Rosa' },
-              'Santa Rosa'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'Milpitas' },
-              'Milpitas'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'Santa Clara' },
-              'Santa Clara'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'Fremont' },
-              'Fremont'
-            )
+            this.cities()
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'label',
+            { htmlFor: 'homeType' },
+            'Home Types'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'select',
@@ -315,50 +396,17 @@ var Filter = function (_Component) {
               { value: 'All' },
               'All Types'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'House' },
-              'House'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'Apartment' },
-              'Apartment'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: 'Condo' },
-              'Condo'
-            )
+            this.homeTypes()
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'label',
+            { htmlFor: 'bedrooms' },
+            'Bedrooms'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'select',
             { name: 'bedrooms', className: 'filters bedrooms', onChange: this.props.change },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: '0' },
-              'Bedrooms'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: '1' },
-              '1+ Bedrooms'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: '2' },
-              '2+ Bedrooms'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: '3' },
-              '3+ Bedrooms'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'option',
-              { value: '4' },
-              '4+ Bedrooms'
-            )
+            this.bedrooms()
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -490,17 +538,17 @@ var Header = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'a',
             { href: '#' },
-            'Create Ads'
+            'Become a host'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'a',
             { href: '#' },
-            'About Us'
+            'Help'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'a',
             { href: '#' },
-            'Log In'
+            'Sign up'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'a',
