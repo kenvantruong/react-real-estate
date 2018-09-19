@@ -63,7 +63,7 @@ var listingsData = [{
   floorSpace: 3400,
   extras: ['Game Room', 'Boat'],
   homeType: 'Condo',
-  image: 'https://ap.rdcpix.com/446966594/12d1b9e197de4a6c5bb0ce62fa9ae96cl-m0xd-w1020_h770_q80.jpg'
+  image: 'http://www.domaza.ru/upload/userfiles/75418/%D0%B4%D0%BE%D0%BC%20%D0%B2%20%D0%B1%D0%BE%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D0%B8.jpg'
 }, {
   address: '202 Ridgewood Dr.',
   city: 'Milpitas',
@@ -73,7 +73,7 @@ var listingsData = [{
   floorSpace: 3400,
   extras: ['Swimming Pool', 'Game Room'],
   homeType: 'house',
-  image: 'https://ap.rdcpix.com/1905569504/c4e8e3a8ce69757bdb870233a59f6aacl-m0xd-w1020_h770_q80.jpg'
+  image: 'http://www.domaza.ru/upload/userfiles/26/%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%B6%D0%B0_%D0%B4%D0%BE%D0%BC%D0%BE%D0%B2_%D0%B2_%D0%B1%D0%BE%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D0%B8.jpg'
 }, {
   address: '201 Center St.',
   city: 'Santa Clara',
@@ -138,10 +138,12 @@ var App = function (_Component) {
       elevator: false,
       finished_basement: false,
       gym: false,
-      swimming_pool: false
+      swimming_pool: false,
+      filteredData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */]
     };
 
     _this.change = _this.change.bind(_this);
+    _this.filteredData = _this.filteredData.bind(_this);
     return _this;
   }
 
@@ -155,6 +157,19 @@ var App = function (_Component) {
 
       this.setState(_defineProperty({}, name, value), function () {
         console.log(_this2.state);
+        _this2.filteredData();
+      });
+    }
+  }, {
+    key: 'filteredData',
+    value: function filteredData() {
+      var _this3 = this;
+
+      var newData = this.state.listingsData.filter(function (item) {
+        return item.price >= _this3.state.min_price && item.price <= _this3.state.max_price && item.floorSpace >= _this3.state.min_floor_space && item.floorSpace <= _this3.state.max_floor_space;
+      });
+      this.setState({
+        filteredData: newData
       });
     }
   }, {
@@ -168,7 +183,7 @@ var App = function (_Component) {
           'section',
           { id: 'content-area' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Filter_js__["a" /* default */], { change: this.change, globalState: this.state }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], { listingsData: this.state.listingsData })
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], { listingsData: this.state.filteredData })
         )
       );
     }
@@ -508,6 +523,10 @@ var Listings = function (_Component) {
     value: function loopListings() {
       var listingsData = this.props.listingsData;
 
+
+      if (listingsData == undefined || listingsData.length == 0) {
+        return "Sorry your filter did not match any listings";
+      }
 
       return listingsData.map(function (listing, index) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
