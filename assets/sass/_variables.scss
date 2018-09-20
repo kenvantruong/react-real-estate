@@ -8,6 +8,12 @@ $offwhite: #fff;
 $pink: #fc5c63;
 $darkgrey: #828d9d;
 $lightgrey: #DAE2EF;
+$grid-columns: 12;
+$grid-max-width: 1200px; //breakpoint-small
+$breakpoint-small: "only screen and (min-width: 0px)";
+$breakpoint-medium: "only screen and (min-width: 768px)";
+$breakpoint-large: "only screen and (min-width: 1000px)";
+$breakpoint-xl: "only screen and (min-width: 1300px)";
 
 // -------------------
 

@@ -16,16 +16,17 @@ class App extends Component {
       homeType: 'All',
       bedrooms: 0,
       min_price: 0,
-      max_price: 1000000,
+      max_price: 100,
       min_floor_space: 0,
-      max_floor_space: 50000,
+      max_floor_space: 5000,
       elevator: false,
       finished_basement: false,
       gym: false,
       swimming_pool: false,
       filteredData: listingsData,
       populateFormsData: '',
-      sortby: 'price-dsc'
+      sortby: 'price-dsc',
+      view: 'box'
     }
     
     this.change = this.change.bind(this)
@@ -135,7 +136,7 @@ class App extends Component {
         <Header />
         <section id="content-area">
           <Filter change={this.change} globalState={this.state} populateAction={this.populateForms}/>
-          <Listings listingsData={this.state.filteredData} change={this.change}/>
+          <Listings listingsData={this.state.filteredData} change={this.change} globalState={this.state} />
         </section>
       </div>
     )

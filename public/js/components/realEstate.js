@@ -147,16 +147,17 @@ var App = function (_Component) {
       homeType: 'All',
       bedrooms: 0,
       min_price: 0,
-      max_price: 1000000,
+      max_price: 100,
       min_floor_space: 0,
-      max_floor_space: 50000,
+      max_floor_space: 5000,
       elevator: false,
       finished_basement: false,
       gym: false,
       swimming_pool: false,
       filteredData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */],
       populateFormsData: '',
-      sortby: 'price-dsc'
+      sortby: 'price-dsc',
+      view: 'box'
     };
 
     _this.change = _this.change.bind(_this);
@@ -280,7 +281,7 @@ var App = function (_Component) {
           'section',
           { id: 'content-area' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Filter_js__["a" /* default */], { change: this.change, globalState: this.state, populateAction: this.populateForms }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], { listingsData: this.state.filteredData, change: this.change })
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], { listingsData: this.state.filteredData, change: this.change, globalState: this.state })
         )
       );
     }
@@ -637,6 +638,8 @@ var Listings = function (_Component) {
   _createClass(Listings, [{
     key: 'loopListings',
     value: function loopListings() {
+      var _this2 = this;
+
       var listingsData = this.props.listingsData;
 
 
@@ -645,99 +648,197 @@ var Listings = function (_Component) {
       }
 
       return listingsData.map(function (listing, index) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'col-md-3', key: index },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        if (_this2.props.globalState.view == 'box') {
+          // THIS IS BOX VIEW
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
-            { className: 'listing' },
+            { className: 'col-md-3', key: index },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
-              { className: 'listing-img', style: { background: 'url("' + listing.image + '") no-repeat center center' } },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'span',
-                { className: 'address' },
-                listing.address
-              ),
+              { className: 'listing' },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                { className: 'details' },
+                { className: 'listing-img', style: { background: 'url("' + listing.image + '") no-repeat center center' } },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'div',
-                  { className: 'col-md-3' },
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'user-img' })
+                  'span',
+                  { className: 'address' },
+                  listing.address
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'div',
-                  { className: 'col-md-9' },
+                  { className: 'details' },
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'user-details' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                      'span',
-                      { className: 'user-name' },
-                      'Nina Smith'
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                      'span',
-                      { className: 'post-date' },
-                      '06/25/2018'
-                    )
+                    { className: 'col-md-3' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'user-img' })
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'listing-details' },
+                    { className: 'col-md-9' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                       'div',
-                      { className: 'floor-space' },
-                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'far fa-square', 'aria-hidden': 'true' }),
+                      { className: 'user-details' },
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'span',
-                        null,
-                        '1000 ft\xB2'
+                        { className: 'user-name' },
+                        'Nina Smith is your Host'
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'span',
+                        { className: 'post-date' },
+                        '06/25/2018'
                       )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                       'div',
-                      { className: 'bedrooms' },
-                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-bed', 'aria-hidden': 'true' }),
+                      { className: 'listing-details' },
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'span',
-                        null,
-                        listing.rooms,
-                        ' bedrooms'
+                        'div',
+                        { className: 'floor-space' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'far fa-square', 'aria-hidden': 'true' }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'span',
+                          null,
+                          '1000 ft\xB2'
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'bedrooms' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-bed', 'aria-hidden': 'true' }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'span',
+                          null,
+                          listing.rooms,
+                          ' bedrooms'
+                        )
                       )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'view-btn' },
+                      'View Listing'
                     )
-                  ),
-                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'view-btn' },
-                    'View Listing'
                   )
                 )
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              { className: 'bottom-info' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'span',
-                { className: 'price' },
-                '$',
-                listing.price,
-                '.00USD/night'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'span',
-                { className: 'location' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
-                listing.city,
-                ', ',
-                listing.state
+                'div',
+                { className: 'bottom-info' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'span',
+                  { className: 'price' },
+                  '$',
+                  listing.price,
+                  '.00/night'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'span',
+                  { className: 'location' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
+                  listing.city,
+                  ', ',
+                  listing.state
+                )
               )
             )
-          )
-        );
+          );
+        } else {
+          // THIS IS LONG VIEW
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'col-md-12 col-lg-6', key: index },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'listing' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'listing-img', style: { background: 'url("' + listing.image + '") no-repeat center center' } },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'span',
+                  { className: 'address' },
+                  listing.address
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'div',
+                  { className: 'details' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-md-3' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'user-img' })
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-md-9' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'user-details' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'span',
+                        { className: 'user-name' },
+                        'Nina Smith is your Host'
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'span',
+                        { className: 'post-date' },
+                        '06/25/2018'
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'listing-details' },
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'floor-space' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'far fa-square', 'aria-hidden': 'true' }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'span',
+                          null,
+                          '1000 ft\xB2'
+                        )
+                      ),
+                      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'bedrooms' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-bed', 'aria-hidden': 'true' }),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                          'span',
+                          null,
+                          listing.rooms,
+                          ' bedrooms'
+                        )
+                      )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'div',
+                      { className: 'view-btn' },
+                      'View Listing'
+                    )
+                  )
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'bottom-info' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'span',
+                  { className: 'price' },
+                  '$',
+                  listing.price,
+                  '.00/night'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'span',
+                  { className: 'location' },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fa fa-map-marker', 'aria-hidden': 'true' }),
+                  listing.city,
+                  ', ',
+                  listing.state
+                )
+              )
+            )
+          );
+        }
       });
     }
   }, {
