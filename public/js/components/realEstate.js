@@ -6,40 +6,40 @@ webpackJsonp([0],{
 "use strict";
 var listingsData = [{
   address: '3345 American Yams Rd.',
-  city: 'Eaglewood',
+  city: 'Mexico City',
   state: 'CA',
   rooms: 3,
-  price: 455000,
+  price: 45,
   floorSpace: 2000,
   extras: ['elevator', 'basketball court'],
   homeType: 'House',
   image: 'http://www.billgriffinrealestate.com/wp-content/uploads/Luxury-Contemporary-Homes-in-Dallas-1-1080x675.jpg'
 }, {
   address: '7894 Lake Chabord dr.',
-  city: 'Fremont',
+  city: 'Moscow',
   state: 'CA',
   rooms: 4,
-  price: 1855000,
+  price: 185,
   floorSpace: 7500,
   extras: ['basketball court', 'tennis court'],
   homeType: 'Condo',
   image: 'https://www.washingtonian.com/wp-content/uploads/2018/08/AIA1-2048x1365.jpg'
 }, {
   address: '5683 Lake Shermand dr.',
-  city: 'Sacramento',
+  city: 'Barcelona',
   state: 'CA',
   rooms: 4,
-  price: 855000,
+  price: 85,
   floorSpace: 4500,
   extras: ['bowling alley', 'Billard'],
   homeType: 'Apartment',
   image: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
 }, {
   address: '2398 Ashley way.',
-  city: 'Oakland',
+  city: 'Armenia',
   state: 'CA',
   rooms: 2,
-  price: 955000,
+  price: 95,
   floorSpace: 2800,
   extras: ['theater room', 'skate park backyard'],
   homeType: 'House',
@@ -49,17 +49,17 @@ var listingsData = [{
   city: 'San Rafael',
   state: 'CA',
   rooms: 3,
-  price: 565000,
+  price: 56,
   floorSpace: 2400,
   extras: ['hot tub', 'bbq grill'],
   homeType: 'House',
   image: 'https://ap.rdcpix.com/446966594/12d1b9e197de4a6c5bb0ce62fa9ae96cl-m0xd-w1020_h770_q80.jpg'
 }, {
   address: '1714 Mission Ave.',
-  city: 'Santa Rosa',
+  city: 'La Habana',
   state: 'CA',
   rooms: 3,
-  price: 765000,
+  price: 76,
   floorSpace: 3400,
   extras: ['Game Room', 'Boat'],
   homeType: 'Condo',
@@ -69,7 +69,7 @@ var listingsData = [{
   city: 'Milpitas',
   state: 'CA',
   rooms: 2,
-  price: 965000,
+  price: 96,
   floorSpace: 3400,
   extras: ['Swimming Pool', 'Game Room'],
   homeType: 'Apartment',
@@ -79,17 +79,17 @@ var listingsData = [{
   city: 'Santa Clara',
   state: 'CA',
   rooms: 2,
-  price: 765000,
+  price: 76,
   floorSpace: 2400,
   extras: ['Hot Tub', 'No Neighbors'],
   homeType: 'Condo',
   image: 'https://ap.rdcpix.com/146421606/247044e7106649e1b01773936c0aaf0bl-m0xd-w1020_h770_q80.jpg'
 }, {
-  address: '1237 Lake Merrit Blvd.',
-  city: 'Fremont',
+  address: '77 Lake Merrit Blvd.',
+  city: 'Bali',
   state: 'CA',
   rooms: 5,
-  price: 1855000,
+  price: 185,
   floorSpace: 7500,
   extras: ['basketball court', 'tennis court'],
   homeType: 'Condo',
@@ -155,7 +155,8 @@ var App = function (_Component) {
       gym: false,
       swimming_pool: false,
       filteredData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */],
-      populateFormsData: ''
+      populateFormsData: '',
+      sortby: 'price-dsc'
     };
 
     _this.change = _this.change.bind(_this);
@@ -165,6 +166,18 @@ var App = function (_Component) {
   }
 
   _createClass(App, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+
+      var listingsData = this.state.listingsData.sort(function (a, b) {
+        return a.price - b.price;
+      });
+
+      this.setState({
+        listingsData: listingsData
+      });
+    }
+  }, {
     key: 'change',
     value: function change(event) {
       var _this2 = this;
@@ -198,6 +211,18 @@ var App = function (_Component) {
         });
       }
 
+      if (this.state.sortby == 'price-dsc') {
+        newData = newData.sort(function (a, b) {
+          return a.price - b.price;
+        });
+      }
+
+      if (this.state.sortby == 'price-asc') {
+        newData = newData.sort(function (a, b) {
+          return b.price - a.price;
+        });
+      }
+
       this.setState({
         filteredData: newData
       });
@@ -214,6 +239,8 @@ var App = function (_Component) {
       cities = new Set(cities);
       cities = [].concat(_toConsumableArray(cities));
 
+      cities = cities.sort();
+
       // HomeType
       var homeTypes = this.state.listingsData.map(function (item) {
         return item.homeType;
@@ -221,12 +248,16 @@ var App = function (_Component) {
       homeTypes = new Set(homeTypes);
       homeTypes = [].concat(_toConsumableArray(homeTypes));
 
+      homeTypes = homeTypes.sort();
+
       // Bedrooms
       var bedrooms = this.state.listingsData.map(function (item) {
         return item.rooms;
       });
       bedrooms = new Set(bedrooms);
       bedrooms = [].concat(_toConsumableArray(bedrooms));
+
+      bedrooms = bedrooms.sort();
 
       this.setState({
         populateFormsData: {
@@ -249,7 +280,7 @@ var App = function (_Component) {
           'section',
           { id: 'content-area' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Filter_js__["a" /* default */], { change: this.change, globalState: this.state, populateAction: this.populateForms }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], { listingsData: this.state.filteredData })
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Listings_js__["a" /* default */], { listingsData: this.state.filteredData, change: this.change })
         )
       );
     }
@@ -366,7 +397,7 @@ var Filter = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'h4',
             null,
-            'Filter'
+            'Explore'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'label',
@@ -527,11 +558,7 @@ var Header = function (_Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'header',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: 'logo' },
-          ' Logo '
-        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'logo', src: 'https://github.com/kenvantruong/react-real-estate/blob/master/public/img/airbnb-logo.png?raw=true', alt: 'logo' }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'nav',
           null,
@@ -554,6 +581,15 @@ var Header = function (_Component) {
             'a',
             { href: '#', className: 'register-btn' },
             'Register'
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'divOfH1' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h1',
+            { className: 'headerOne' },
+            'Book unique homes and experiences all over the world.'
           )
         )
       );
@@ -688,7 +724,8 @@ var Listings = function (_Component) {
                 'span',
                 { className: 'price' },
                 '$',
-                listing.price
+                listing.price,
+                '.00USD/night'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
@@ -727,16 +764,16 @@ var Listings = function (_Component) {
             { className: 'sort-options' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'select',
-              { name: 'sortby', className: 'sortby' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'option',
-                { value: 'price-asc' },
-                'Highest Price'
-              ),
+              { name: 'sortby', className: 'sortby', onChange: this.props.change },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'option',
                 { value: 'price-dsc' },
                 'Lowest Price'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'option',
+                { value: 'price-asc' },
+                'Highest Price'
               )
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

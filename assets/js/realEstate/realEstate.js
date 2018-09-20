@@ -6,7 +6,6 @@ import Listings from './Listings.js'
 import listingsData from './data/listingsData.js'
 
 
-
 class App extends Component {
   constructor () {
     super()
@@ -25,13 +24,25 @@ class App extends Component {
       gym: false,
       swimming_pool: false,
       filteredData: listingsData,
-      populateFormsData: ''
+      populateFormsData: '',
+      sortby: 'price-dsc'
     }
     
     this.change = this.change.bind(this)
     this.filteredData = this.filteredData.bind(this)
     this.populateForms = this.populateForms.bind(this)
   } 
+  componentWillMount(){
+
+    var listingsData = this.state.listingsData.sort((a, b) => {
+      return a.price - b.price
+    })
+
+
+    this.setState({
+        listingsData
+    })
+  }
   change(event){
     var name = event.target.name
     var value = (event.target.type === 'checkbox') ? event.target.checked : event.target.value
@@ -61,6 +72,18 @@ class App extends Component {
       })
     }
 
+    if(this.state.sortby == 'price-dsc') {
+      newData = newData.sort((a, b) => {
+        return a.price - b.price
+      })
+    }
+
+    if(this.state.sortby == 'price-asc') {
+      newData = newData.sort((a, b) => {
+        return b.price - a.price
+      })
+    }
+
     this.setState({
       filteredData: newData
     })
@@ -74,6 +97,8 @@ class App extends Component {
     cities = new Set(cities)
     cities = [...cities]
 
+    cities = cities.sort()
+
     // HomeType
     var homeTypes = this.state.listingsData.map((item) => {
       return item.homeType
@@ -81,12 +106,16 @@ class App extends Component {
     homeTypes = new Set(homeTypes)
     homeTypes = [...homeTypes]
 
+    homeTypes = homeTypes.sort()
+
     // Bedrooms
     var bedrooms = this.state.listingsData.map((item) => {
       return item.rooms
     })
     bedrooms = new Set(bedrooms)
     bedrooms = [...bedrooms]
+
+    bedrooms = bedrooms.sort()
 
     this.setState({
       populateFormsData: {
@@ -106,7 +135,7 @@ class App extends Component {
         <Header />
         <section id="content-area">
           <Filter change={this.change} globalState={this.state} populateAction={this.populateForms}/>
-          <Listings listingsData={this.state.filteredData}/>
+          <Listings listingsData={this.state.filteredData} change={this.change}/>
         </section>
       </div>
     )
