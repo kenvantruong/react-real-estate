@@ -157,7 +157,8 @@ var App = function (_Component) {
       filteredData: __WEBPACK_IMPORTED_MODULE_5__data_listingsData_js__["a" /* default */],
       populateFormsData: '',
       sortby: 'price-dsc',
-      view: 'box'
+      view: 'box',
+      search: ''
     };
 
     _this.change = _this.change.bind(_this);
@@ -229,6 +230,18 @@ var App = function (_Component) {
       if (this.state.sortby == 'price-asc') {
         newData = newData.sort(function (a, b) {
           return b.price - a.price;
+        });
+      }
+
+      if (this.state.search != '') {
+        newData = newData.filter(function (item) {
+          var city = item.city.toLowerCase();
+          var searchText = _this3.state.search.toLowerCase();
+          var n = city.match(searchText);
+
+          if (n != null) {
+            return true;
+          }
         });
       }
 
@@ -707,7 +720,8 @@ var Listings = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                           'span',
                           null,
-                          '1000 ft\xB2'
+                          listing.floorSpace,
+                          ' ft\xB2'
                         )
                       ),
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -802,7 +816,8 @@ var Listings = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                           'span',
                           null,
-                          '1000 ft\xB2'
+                          listing.floorSpace,
+                          ' ft\xB2'
                         )
                       ),
                       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -858,7 +873,7 @@ var Listings = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'section',
           { className: 'search-area' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'search' })
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'search', onChange: this.props.change })
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'section',
@@ -866,7 +881,8 @@ var Listings = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'results' },
-            '390 results found'
+            this.props.globalState.filteredData.length,
+            ' results found'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -896,7 +912,11 @@ var Listings = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'section',
           { className: 'listings-results' },
-          this.loopListings()
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'row' },
+            this.loopListings()
+          )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'section',
