@@ -873,7 +873,7 @@ var Listings = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'section',
           { className: 'search-area' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'search', onChange: this.props.change })
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', placeholder: 'Search...', className: 'search-style', name: 'search', onChange: this.props.change })
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'section',
