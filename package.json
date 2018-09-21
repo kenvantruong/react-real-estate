@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Super Cool Framework",
   "main": "index.js",
-  "author": "joe santos garcia",
+  "author": "Ken Truong",
   "license": "MIT",
   "homepage": "https://kenvantruong.github.io/react-real-estate/",
   "dependencies": {
@@ -38,6 +38,8 @@
     "webpack-stream": "^3.2.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -d build",
     "bundle": "./node_modules/.bin/webpack",
     "production": "./node_modules/.bin/webpack -p",
     "watch": "gulp",
