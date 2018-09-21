@@ -12,7 +12,8 @@ module.exports = {
     // regularJS: './assets/js/regularJS.js',
     vendor: VENDOR_LIBS
   },
-  output: { filename: '[name].js',
+  //'[name].js'
+  output: { filename: 'server.js',
             path: path.resolve(__dirname, 'public/js/components') },
   module: {
     rules: [
